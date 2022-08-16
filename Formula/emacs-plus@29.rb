@@ -116,6 +116,12 @@ class EmacsPlusAT29 < EmacsBase
     args << "--with-native-compilation" if build.with? "native-comp"
 
     ENV.append "CFLAGS", "-g -Og" if build.with? "debug"
+    ENV.append "BYTE_COMPILE_EXTRA_FLAGS",
+                 "--eval \"(setq native-comp-speed 3)\"",
+                 "--eval \"(setq native-comp-compiler-options '(\"-O2\"))\""
+
+    ENV.append "CFLAGS", "-mcpu=apple-m1 -O2 -pipe -ftree-vectorize -fomit-frame-pointer"
+
 
     args <<
       if build.with? "dbus"
@@ -166,7 +172,7 @@ class EmacsPlusAT29 < EmacsBase
         end
       end
 
-      system "gmake"
+      system "gmake", "NATIVE_FULL_AOT=1", "-j8"
 
       system "gmake", "install"
 
