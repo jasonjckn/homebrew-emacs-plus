@@ -116,10 +116,10 @@ class EmacsPlusAT30 < EmacsBase
     args << "--with-native-compilation" if build.with? "native-comp"
     args << "--without-compress-install" if build.without? "compress-install"
     
-    ENV["LDFLAGS"] = "-L/opt/homebrew/opt/llvm/lib"
-    ENV["CPPFLAGS"] = "-I/opt/homebrew/opt/llvm/include"
-    ENV["CFLAGS"]  = "-I/opt/homebrew/opt/llvm/include"
-    ENV.prepend_path "PATH", "/opt/homebrew/opt/llvm/bin"
+    #ENV["LDFLAGS"] = "-L/opt/homebrew/opt/llvm/lib"
+    #ENV["CPPFLAGS"] = "-I/opt/homebrew/opt/llvm/include"
+    #ENV["CFLAGS"]  = "-I/opt/homebrew/opt/llvm/include"
+    #ENV.prepend_path "PATH", "/opt/homebrew/opt/llvm/bin"
     
     ENV.append "BYTE_COMPILE_EXTRA_FLAGS",
                  "--eval \"(setq native-comp-speed 3)\"",
