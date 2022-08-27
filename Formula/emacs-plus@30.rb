@@ -121,8 +121,13 @@ class EmacsPlusAT30 < EmacsBase
     #ENV["CFLAGS"]  = "-I/opt/homebrew/opt/llvm/include"
     #ENV.prepend_path "PATH", "/opt/homebrew/opt/llvm/bin"
     
-    system "echo", ENV["LDFLAGS"]
-    system "echo", ENV["CFLAGS"]
+    #system "echo", ENV["LDFLAGS"]
+    #system "echo", ENV["CFLAGS"]
+    
+    ENV.prepend "LDFLAGS", "-L/opt/homebrew/opt/llvm/lib"
+    ENV["CFLAGS"]  = "-I/opt/homebrew/opt/llvm/include -w -mmacosx-version-min=12 -isysroot/Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk"
+    ENV["CPPFLAGS"] = ENV["CFLAGS"]
+    ENV.prepend_path "PATH", "/opt/homebrew/opt/llvm/bin"
     
     ENV.append "BYTE_COMPILE_EXTRA_FLAGS",
                  "--eval \"(setq native-comp-speed 3)\"",
