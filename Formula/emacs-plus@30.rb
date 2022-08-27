@@ -121,6 +121,9 @@ class EmacsPlusAT30 < EmacsBase
     #ENV["CFLAGS"]  = "-I/opt/homebrew/opt/llvm/include"
     #ENV.prepend_path "PATH", "/opt/homebrew/opt/llvm/bin"
     
+    system "echo", ENV["LDFLAGS"]
+    system "echo", ENV["CFLAGS"]
+    
     ENV.append "BYTE_COMPILE_EXTRA_FLAGS",
                  "--eval \"(setq native-comp-speed 3)\"",
                  "--eval \"(setq native-comp-compiler-options '(\"-O3\"))\""
